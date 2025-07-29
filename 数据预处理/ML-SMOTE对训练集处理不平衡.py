@@ -4,14 +4,12 @@ import numpy as np
 from collections import Counter
 from imblearn.over_sampling import SMOTE
 
-######################################################
 #                  用户配置区域                      #
-######################################################
 INPUT_TRAIN_PATH = "D:\\研二2\\论文撰写\\训练集.xlsx"  # 输入标准化训练集路径
-OUTPUT_TRAIN_PATH = "D:\\研二2\\论文撰写\\对训练集进行ML-SMOTE.xlsx"  # 输出过采样后训练集路径
-MINORITY_THRESHOLD = 0.1  # 定义少数类阈值（正样本比例<10%视为少数类）
+OUTPUT_TRAIN_PATH = "D:\\研二2\\论文撰写\\对训练集进行ML-SMOTE.xlsx"  
+MINORITY_THRESHOLD = 0.1  # 定义少数类阈值
 K_NEIGHBORS = 3  # SMOTE近邻数
-RANDOM_STATE = 42  # 随机种子
+RANDOM_STATE = 42  
 
 
 ######################################################
