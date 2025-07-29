@@ -13,7 +13,7 @@ warnings.filterwarnings('ignore')
 
 # ---------------------------
 # 1. 数据加载与预处理
-# ---------------------------
+
 def load_data(train_path, test_path):
     """加载训练集和测试集"""
     train = pd.read_excel(train_path)
@@ -61,9 +61,9 @@ def evaluate(y_true, y_pred, y_prob):
         'Micro F1': f1_score(y_true, y_pred, average='micro'),
         'ROC AUC OvR': roc_auc_score(y_true, y_prob, multi_class='ovr')
     }
-    # 新增综合评分（可调整权重）
+    # 综合评分
     weights = {
-        'Hamming Loss': -0.3,  # 越小越好，故取负
+        'Hamming Loss': -0.3, 
         'Macro F1': 0.4,
         'Micro F1': 0.3
     }
@@ -71,7 +71,7 @@ def evaluate(y_true, y_pred, y_prob):
     return metrics
 
 # ---------------------------
-# 4. 特征选择主流程（修正多标签处理和可视化）
+# 4. 特征选择主流程
 # ---------------------------
 def lightgbm_feature_selection(train_path, test_path):
     # 加载数据
@@ -121,10 +121,7 @@ def lightgbm_feature_selection(train_path, test_path):
             print(f"参数 {params} 失败: {str(e)}")
             continue
 
-        # ---------------------------
-        # 新增结果分析部分
-        # ---------------------------
-        # 保存所有结果
+    
     results_df = pd.DataFrame(all_results)
     results_df.to_excel("all_parameter_results.xlsx", index=False)
 
@@ -142,8 +139,7 @@ def lightgbm_feature_selection(train_path, test_path):
 
 
     # ---------------------------
-    # 可视化（简化版，避免中文问题）
-    # ---------------------------
+    # 可视化
     feature_importance = pd.Series(best_importance, index=X_train.columns)
     top_features = feature_importance.sort_values(ascending=False).head(30)
 
@@ -183,11 +179,10 @@ def lightgbm_feature_selection(train_path, test_path):
 # 执行代码
 # ---------------------------
 if __name__ == "__main__":
-    train_path = "D:\\研二2\\论文撰写\\数据合并\\标准化、缺失值\\train_resampled_manual_mlsmote.xlsx"  # 替换为您的训练集路径
-    test_path = "D:\\研二2\\论文撰写\\数据合并\\标准化、缺失值\\测试集.xlsx"  # 替换为您的测试集路径
+    train_path = "mlsmote.xlsx" 
+    test_path = "测试集.xlsx" 
 
     selected_features, metrics = lightgbm_feature_selection(train_path, test_path)
     pd.Series(selected_features).to_excel("selected_features.xlsx", index=False)
-    print("\n特征选择完成！结果已保存到 selected_features.xlsx")
 
 
