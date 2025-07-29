@@ -11,10 +11,9 @@ warnings.filterwarnings('ignore')
 
 
 # ---------------------------
-# 1. 数据加载与预处理
-# ---------------------------
+# 1. 数据加载
+
 def load_data(train_path, test_path):
-    """加载并预处理数据"""
     train = pd.read_excel(train_path)
     test = pd.read_excel(test_path)
 
@@ -35,7 +34,7 @@ def load_data(train_path, test_path):
 
 # ---------------------------
 # 2. 多标签评估函数
-# ---------------------------
+
 def evaluate(y_true, y_pred, y_prob):
     """计算多标签评估指标"""
     metrics = {
@@ -54,7 +53,6 @@ def evaluate(y_true, y_pred, y_prob):
 
 # ---------------------------
 # 3. 参数网格设置
-# ---------------------------
 def get_param_grid():
     """定义随机森林参数组合"""
     return {
@@ -156,8 +154,8 @@ def rf_feature_selection(train_path, test_path):
 # ---------------------------
 if __name__ == "__main__":
     # 文件路径配置
-    train_path = "D:\\研二2\\论文撰写\\17-23年数据\\标准化.xlsx"
-    test_path = "D:\\研二2\\论文撰写\\17-23年数据\\标准化.xlsx"
+    train_path = "标准化.xlsx"
+    test_path = "测试.xlsx"
 
     # 运行特征选择
     selected_features, best_params, results_df = rf_feature_selection(train_path, test_path)
