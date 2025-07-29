@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 def information_gain_multi_label(X, y, threshold=0.01):
     """
     IGMF (Information Gain for Multi-label Feature Selection)
-    优化版：适用于y已经是二进制形式的情况
+   
 
     参数:
         X: 特征DataFrame (n_samples, n_features)
@@ -18,7 +18,7 @@ def information_gain_multi_label(X, y, threshold=0.01):
         selected_features: 选中的特征列表
         ig_scores: 各特征的信息增益得分
     """
-    # 1. 确保y是NumPy数组（如果y是DataFrame则转换）
+  
     y = np.array(y)
 
     # 2. 检查y的二进制格式
@@ -43,7 +43,7 @@ def information_gain_multi_label(X, y, threshold=0.01):
 # 使用示例
 if __name__ == "__main__":
     # 加载数据
-    data = pd.read_excel("D:\\研二2\\论文撰写\\数据合并\\标准化、缺失值\\不填充缺失值\\独热编码.xlsx")
+    data = pd.read_excel("独热编码.xlsx")
 
     # 分离特征和标签
     X = data.iloc[:, 1:-4]  # 特征列（跳过ID和最后4列标签）
