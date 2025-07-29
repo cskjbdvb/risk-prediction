@@ -9,16 +9,7 @@ def lrfs_feature_selection(X, y, threshold=0.5, top_k=None, output_path=None):
     """
     LRFS (Label Redundancy-based Feature Selection)
 
-    参数说明（可调整部分）:
-    ----------------------------
-    X: 特征DataFrame (n_samples, n_features)
-    y: 多标签二进制矩阵 (n_samples, n_labels)
-    threshold: 标签冗余阈值 (默认0.5)
-        - 范围[0,1]，值越大认为标签冗余度越高
-    top_k: 指定要选择的前K个特征 (默认None表示自动根据阈值选择)
-    output_path: 结果保存路径 (默认None不保存)
-        - 示例: r"D:\results\lrfs_features.xlsx"
-    """
+  
     # ========== 1. 数据校验 ==========
     y = np.array(y)
     assert y.ndim == 2, "y必须是二维标签矩阵"
@@ -67,24 +58,22 @@ def lrfs_feature_selection(X, y, threshold=0.5, top_k=None, output_path=None):
     return selected_features, result_df
 
 
-# ==============================================
-# 使用示例（根据您的数据调整以下部分）
-# ==============================================
+
 if __name__ == "__main__":
     # 可调整参数区域
     CONFIG = {
-        'data_path': r"D:\\研二2\\论文撰写\\数据合并\\标准化、缺失值\\不填充缺失值\\独热编码.xlsx",
-        'output_path': r"D:\\研二2\\论文撰写\\数据合并\\标准化、缺失值\\不填充缺失值\\特征选择\\LRFS.xlsx",  # 自定义输出路径
-        'threshold': 0.5,  # 调整标签冗余阈值（0-1之间）
-        'top_k': None,  # 指定需要选择的特征数量（如20）
+        'data_path': r"独热编码.xlsx",
+        'output_path': r"LRFS.xlsx", 
+        'threshold': 0.5,  
+        'top_k': None, 
     }
 
     # 1. 加载数据
     data = pd.read_excel(CONFIG['data_path'])
-    X = data.iloc[:, 1:-4]  # 特征列（跳过ID和最后4列）
-    y = data.iloc[:, -4:]  # 标签列（已经是二进制形式）
+    X = data.iloc[:, 1:-4]  # 特征列
+    y = data.iloc[:, -4:]  # 标签列
 
-    # 2. 分类特征编码（如果存在）
+    # 2. 分类特征编码
     cat_cols = X.select_dtypes(include=['object', 'category']).columns
     for col in cat_cols:
         X[col] = LabelEncoder().fit_transform(X[col].astype(str))
@@ -100,4 +89,3 @@ if __name__ == "__main__":
     # 4. 打印结果
     print(f"\n选中特征数: {len(selected_features)}")
     print("Top 10特征评分:")
-    print(result_df.head(10))
