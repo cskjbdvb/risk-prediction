@@ -7,10 +7,10 @@ import seaborn as sns
 ######################################################
 #                  用户配置区域                      #
 ######################################################
-INPUT_PATH = "D:\\研二2\\论文撰写\\数据合并\\2025.4.17特征选择之后重新选择数据\\原始数据.xlsx"  # 输入数据路径
-OUTPUT_PATH = "D:\\研二2\\论文撰写\\数据合并\\2025.4.17特征选择之后重新选择数据\\箱线图异常值处理.xlsx"  # 输出路径
-OUTLIER_METHOD = "remove"  # 处理方式: "remove"/"clip"/"median"
-PLOT_BEFORE_AFTER = True  # 是否生成处理前后对比图
+INPUT_PATH = "原始数据.xlsx"  # 输入数据路径
+OUTPUT_PATH = "箱线图异常值处理.xlsx"  # 输出路径
+OUTLIER_METHOD = "remove"  
+PLOT_BEFORE_AFTER = True  
 
 # ========= 新增手动指定功能 =========
 AUTO_THRESHOLD = 10  # 自动检测阈值（唯一值≥此值视为连续型）
