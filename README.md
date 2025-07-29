@@ -1,4 +1,3 @@
-<img width="792" height="801" alt="image" src="https://github.com/user-attachments/assets/7a2b275c-6bb9-44b6-9cc8-9fe7cf4f711d" /># risk-prediction
 慢性病共病风险预测模型
 技术栈：Python (sklearn/SHAP) · 集成学习 · 临床数据分析  
 
