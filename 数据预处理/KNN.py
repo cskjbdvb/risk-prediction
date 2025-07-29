@@ -6,13 +6,12 @@ from sklearn.preprocessing import StandardScaler
 from tqdm import tqdm
 
 # ===================== 参数配置 =====================
-INPUT_FILE = "D:\\研二2\\论文撰写\\数据合并\\标准化.xlsx"  # 替换为你的数据文件路径
-SHEET_NAME = "填充缺失值"  # 工作表名称
+INPUT_FILE = "D:\\研二2\\标准化.xlsx"  # 替换为你的数据文件路径
 ID_COL = 'SEQN'  # ID列名
-LABEL_COLS = ['DIQ010 - 医生告诉你有糖尿病', 'MCQ160c - 曾被告知自己患有冠心病', 'MCQ160f - 曾被告知你中风','是否被告知患有COPD、肺气肿或慢性支气管炎']  # 四个标签列名
+LABEL_COLS = ['糖尿病', '冠心病', '中风','COPD']  
 K_VALUES = [15,17,19,21,23]  # 要测试的K值范围
-TEST_SIZE = 0.2  # 用于评估的测试集比例
-RANDOM_STATE = 42  # 随机种子
+TEST_SIZE = 0.2  
+RANDOM_STATE = 42  
 
 
 # ==================================================
@@ -22,8 +21,6 @@ def load_data():
     df = pd.read_excel(INPUT_FILE, sheet_name=SHEET_NAME)
     print("\n=== 数据加载成功 ===")
     print(f"数据形状: {df.shape}")
-    print("\n前3行数据预览:")
-    print(df.head(3))
     return df
 
 
@@ -178,11 +175,6 @@ def save_results(final_df, ids, labels, best_k, results_df):
     results_df.to_excel(eval_file, index=False)
 
     print("\n=== 处理完成 ===")
-    print(f"✅ 填充后的数据已保存到: {output_file}")
-    print(f"✅ 评估结果已保存到: {eval_file}")
-    print(f"🔄 使用的K值: {best_k}")
-    print("\n填充后数据预览:")
-    print(final_df.head(3))
 
 
 if __name__ == "__main__":
