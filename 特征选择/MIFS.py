@@ -11,11 +11,10 @@ from time import time
 
 # 1. 数据加载
 def load_data(file_path):
-    """加载Excel数据，返回特征和标签"""
     df = pd.read_excel(file_path)
     ids = df['ID'].values
-    labels = df.iloc[:, -4:].values.astype(int)  # 最后4列是标签
-    features = df.iloc[:, 1:-4].values  # 中间所有列是特征
+    labels = df.iloc[:, -4:].values.astype(int) 
+    features = df.iloc[:, 1:-4].values 
     feature_names = df.columns[1:-4].tolist()
     return ids, features, labels, feature_names
 
@@ -36,8 +35,8 @@ def evaluate_mifs(X, y, k_features, alpha_values):
             mifs = mifs(
                 k=k,  # 选择前k个特征
                 alpha=alpha,  # 标签相关性权重
-                sigma=0.1,  # 高斯核参数（默认0.1）
-                n_jobs=-1  # 使用所有CPU核心
+                sigma=0.1,  
+                n_jobs=-1 
             )
             X_train_selected = mifs.fit_transform(X_train, y_train)
             X_test_selected = mifs.transform(X_test)
@@ -69,7 +68,6 @@ def evaluate_mifs(X, y, k_features, alpha_values):
 
 # 3. 保存结果
 def save_results(results_df, selected_features, output_file):
-    """保存评估结果和选中的特征"""
     with pd.ExcelWriter(output_file) as writer:
         results_df.to_excel(writer, sheet_name='参数评估', index=False)
         pd.DataFrame({'selected_features': selected_features}).to_excel(
@@ -79,8 +77,8 @@ def save_results(results_df, selected_features, output_file):
 # 主流程
 if __name__ == "__main__":
     # 参数设置
-    input_file = "D:\\研二2\\论文撰写\\17-23年数据\\标准化.xlsx"  # 替换为你的Excel文件路径
-    output_file = "D:\\研二2\\论文撰写\\17-23年数据\\MIFS.xlsx"
+    input_file = "标准化.xlsx"  # 替换为你的Excel文件路径
+    output_file = "\MIFS.xlsx"
 
     # MIFS参数网格
     alpha_values = [0.1, 0.5, 1.0]  # 标签相关性权重
