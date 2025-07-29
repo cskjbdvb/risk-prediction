@@ -10,30 +10,19 @@ import matplotlib.pyplot as plt
 # 1. 数据加载与预处理
 # ---------------------------
 def load_data(train_path, test_path):
-    """
-    加载训练集和测试集数据
-    参数:
-        train_path: 训练集Excel文件路径
-        test_path: 测试集Excel文件路径
-    返回:
-        X_train, y_train: 训练集特征和标签
-        X_test, y_test: 测试集特征和标签
-        feature_names: 特征名称列表
-    """
-    # 读取Excel文件
     train = pd.read_excel(train_path)
     test = pd.read_excel(test_path)
 
-    # 分离特征和标签 (第一列是ID，最后4列是标签)
-    X_train = train.iloc[:, 1:-4]  # 特征
-    y_train = train.iloc[:, -4:]  # 4个慢性病标签
+    # 分离特征和标签
+    X_train = train.iloc[:, 1:-4]  
+    y_train = train.iloc[:, -4:] 
     X_test = test.iloc[:, 1:-4]
     y_test = test.iloc[:, -4:]
 
     # 获取特征名称
     feature_names = X_train.columns.tolist()
 
-    # 数据标准化（Lasso对特征尺度敏感）
+    # 数据标准化
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
@@ -46,17 +35,8 @@ def load_data(train_path, test_path):
 
 # ---------------------------
 # 2. 多标签评估函数
-# ---------------------------
 def evaluate(y_true, y_pred, y_scores):
-    """
-    计算多标签评估指标
-    参数:
-        y_true: 真实标签
-        y_pred: 预测标签
-        y_scores: 预测概率/分数
-    返回:
-        metrics: 包含各项指标的字典
-    """
+  
     metrics = {
         'Hamming Loss': hamming_loss(y_true, y_pred),
         'Macro F1': f1_score(y_true, y_pred, average='macro'),
@@ -138,8 +118,8 @@ def multitask_lasso_feature_selection(train_path, test_path):
 # ---------------------------
 if __name__ == "__main__":
     # 文件路径（替换为您的实际路径）
-    train_path = "D:\\研二2\\论文撰写\\17-23年数据\\标准化.xlsx"
-    test_path = "D:\\研二2\\论文撰写\\17-23年数据\\标准化.xlsx"
+    train_path = "标准化.xlsx"
+    test_path = "测试.xlsx"
 
     # 运行特征选择
     selected_features, metrics, coef_df = multitask_lasso_feature_selection(train_path, test_path)
