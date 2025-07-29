@@ -1,2 +1,14 @@
-# risk-prediction
-NHANES数据库慢性病共病风险预测研究
+<img width="792" height="801" alt="image" src="https://github.com/user-attachments/assets/7a2b275c-6bb9-44b6-9cc8-9fe7cf4f711d" /># risk-prediction
+慢性病共病风险预测模型
+技术栈：Python (sklearn/SHAP) · 集成学习 · 临床数据分析  
+
+研究内容：
+✅ 数据预处理
+✅ 特征选择
+✅ 模型构建
+✅ 模型评估
+
+核心成果：
+✅ 83.47%准确率预测4种慢性病（糖尿病/冠心病/中风/COPD）  
+✅ 降低40%筛查成本（多病联合vs传统单病检测）  
+✅ 10万＋例真实数据清洗（从115个特征筛选26个关键指标）  
